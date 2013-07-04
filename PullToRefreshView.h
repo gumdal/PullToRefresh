@@ -33,9 +33,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 typedef enum {
-  PullToRefreshViewStateNormal = 0,
-	PullToRefreshViewStateReady,
-	PullToRefreshViewStateLoading
+  PullToRefreshViewStateNormal = 1,
+	PullToRefreshViewStateReady = 1<<1,
+	PullToRefreshViewStateLoading = 1<<2
 } PullToRefreshViewState;
 
 @protocol PullToRefreshViewDelegate;
@@ -56,9 +56,14 @@ typedef enum {
 
 - (void)refreshLastUpdatedDate;
 - (void)finishedLoading;
-- (void)setState:(PullToRefreshViewState)state_;
+- (BOOL)setState:(PullToRefreshViewState)state_;
 
 - (id)initWithScrollView:(UIScrollView *)scrollView;
+
+-(CGFloat)topInsetToShowView;
+-(CGFloat)offsetCheckToTriggerPullToRefresh;
+-(CGFloat)heightOfView;
+-(CGFloat)heightOfViewsBelow;
 
 @end
 
